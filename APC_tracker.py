@@ -22,6 +22,7 @@ import pandas as pd
 import requests
 import os
 import datetime
+import shutil
 
 
 def compare_excel_files(file1, file2):
@@ -65,10 +66,11 @@ def rename_file_with_date(file_path):
     new_filename = f"{os.path.splitext(filename)[0]}_{today.strftime('%Y-%m-%d')}{os.path.splitext(filename)[1]}"
     
     # Construct the new file path
-    new_file_path = os.path.join(directory, new_filename)
+    new_file_path = os.path.join(directory, 'files', new_filename)
     
     # Rename the file
-    os.rename(file_path, new_file_path)
+    #os.rename(file_path, new_file_path)
+    shutil.move(file_path, new_file_path)
     
     print(f"The file has been renamed to: {new_file_path}")
 
@@ -112,7 +114,7 @@ if len(matching_files) != 1:
 # Assign today's file to file2
 file2 = matching_files[0]
 
-print (f"Yesterday's file: {file1}\nToday's file:     {file2}")     # keep the weird spacing so the print output looks nice
+print (f"Yesterday's file: {file1}\nToday's file:     {file2}\n")     # keep the weird spacing so the print output looks nice
 
 
 
